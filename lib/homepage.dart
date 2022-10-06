@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'scanpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,21 +14,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>{
   String _val = 'Here is the text to be displayed';
-  bool isShowFlashIcon = false;
 
-  Future<void> scanQR() async {
-    String barcodeScanRes;
-    try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.QR);
-    } on PlatformException {
-      barcodeScanRes = "Failed";
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Failed to scan"),
-      ));
-    }
+  Future<void> scanQR(BuildContext context) async {
+    String result = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const ScanPage())
+    );
+    if(!mounted) return;
     setState(() {
-      _val = barcodeScanRes;
+      _val = result;
     });
   }
 
@@ -46,7 +38,7 @@ class _HomePageState extends State<HomePage>{
             children: [
               const SizedBox(height: 300,),
               ElevatedButton(
-                  onPressed: () => scanQR(),
+                  onPressed: () => scanQR(context),
                   child: const Text("Scan QR"),
               ),
               Text(_val),

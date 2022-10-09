@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>{
   String _val = 'Here is the text to be displayed';
   String _versionInfo = '';
-  
+
   @override
   void initState() {
     super.initState();

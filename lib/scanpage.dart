@@ -32,6 +32,7 @@ class ScanPage extends StatelessWidget {
           ),
         ],
       ),
+
       body: MobileScanner(
         allowDuplicates: true,
         controller: cameraController,

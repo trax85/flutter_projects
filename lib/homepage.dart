@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'scanpage.dart';
+import 'scanqrpage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +15,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>{
   String _val = 'Here is the text to be displayed';
   String _versionInfo = '';
+  bool _isFrontCam = false;
+  String _frontCam = "Scan With Front Cam";
+  final String _backCam = "Scan With Rear Cam";
+  String buttonText = "Scan With Rear Cam";
 
   @override
   void initState() {
@@ -38,7 +43,7 @@ class _HomePageState extends State<HomePage>{
 
   Future<void> scanQR(BuildContext context) async {
     String result = await Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const ScanPage())
+        MaterialPageRoute(builder: (context) => ScanQRPage(_isFrontCam))
     );
     if(!mounted) return;
     setState(() {
@@ -61,6 +66,22 @@ class _HomePageState extends State<HomePage>{
               ElevatedButton(
                   onPressed: () => scanQR(context),
                   child: const Text("Scan QR"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  String text;
+                  if(_isFrontCam) {
+                    text = _backCam;
+                    _isFrontCam = false;
+                  } else {
+                    text = _frontCam;
+                    _isFrontCam = true;
+                  }
+                  setState(() {
+                    buttonText = text;
+                  });
+                },
+                child: Text(buttonText),
               ),
               Text(_val),
             ],

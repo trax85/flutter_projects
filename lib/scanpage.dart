@@ -38,6 +38,11 @@ class ScanPage extends StatelessWidget {
         controller: cameraController,
         onDetect: (Barcode barcode, MobileScannerArguments? args) {
           if (!screenOpened) {
+            if(barcode.type != BarcodeType.url) {
+              return;
+            } else {
+              print("Type of URL");
+            }
             final String code;
             if(barcode.rawValue == null){
               code = 'failed to fetch qr code';

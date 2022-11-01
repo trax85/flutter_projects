@@ -39,6 +39,7 @@ dependencies:
   mobile_scanner: ^1.0.0
   qr_code_dart_scan: ^0.6.0
   camera: ^0.9.8+1
+  get:
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'scanpage.dart';
 import 'scanqrpage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -16,7 +15,7 @@ class _HomePageState extends State<HomePage>{
   String _val = 'Here is the text to be displayed';
   String _versionInfo = '';
   bool _isFrontCam = false;
-  String _frontCam = "Scan With Front Cam";
+  final String _frontCam = "Scan With Front Cam";
   final String _backCam = "Scan With Rear Cam";
   String buttonText = "Scan With Rear Cam";
 

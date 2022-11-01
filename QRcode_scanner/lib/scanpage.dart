@@ -41,7 +41,7 @@ class ScanPage extends StatelessWidget {
             if(barcode.type != BarcodeType.url) {
               return;
             } else {
-              print("Type of URL");
+              //print("Type of URL");
             }
             final String code;
             if(barcode.rawValue == null){

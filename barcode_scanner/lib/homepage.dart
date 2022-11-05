@@ -11,7 +11,6 @@ class HomePage extends StatefulWidget {
   }
 }
 
-
 class _HomePageState extends State<HomePage>{
   String _val = 'Here is the text to be displayed';
   bool isShowFlashIcon = false;
@@ -20,7 +19,7 @@ class _HomePageState extends State<HomePage>{
     String barcodeScanRes;
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.QR);
+          '#ff6666', 'Cancel', true, ScanMode.BARCODE);
     } on PlatformException {
       barcodeScanRes = "Failed";
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -28,6 +27,13 @@ class _HomePageState extends State<HomePage>{
       ));
     }
     if (!mounted) return;
+
+    if(barcodeScanRes == '-1'){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Failed to scan"),
+      ));
+      return;
+    }
     setState(() {
       _val = barcodeScanRes;
     });
